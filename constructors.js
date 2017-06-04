@@ -128,6 +128,8 @@
    * @return {boolean} success  Whether mana was successfully spent.
    */
 
+
+
   /**
    * @method invoke
    *
@@ -154,3 +156,26 @@
    * @param  {Spellcaster} target         The spell target to be inflicted.
    * @return {boolean}                    Whether the spell was successfully cast.
    */
+
+   Spellcaster.prototype.invoke = function(spell, target) {
+    if ( spell instanceof Spell === false) {
+      return false;
+    } else if ( spell instanceof DamageSpell === false ) {
+      if ( this.mana >= spell.cost ) {
+        this.spendMana(spell.cost);
+        return true;
+      } else {
+        return false;
+      }
+    } else if ( target instanceof Spellcaster === false) {
+        return false;
+    } else if ( spell instanceof DamageSpell ) {
+      if ( this.mana >= spell.cost ) {
+        this.spendMana(spell.cost);
+        target.inflictDamage(spell.damage);
+        return true;
+      } else {
+        return false;
+      }
+    }
+   };
