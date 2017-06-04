@@ -109,8 +109,13 @@
    * @param  {number} damage  Amount of damage to deal to the spellcaster
    */
 
-   Spellcaster.prototype.spendMana = function() {
-
+   Spellcaster.prototype.spendMana = function(cost) {
+    if ( this.mana >= cost ) {
+      this.mana -= cost;
+      return true;
+    } else if ( this.mana < cost ) {
+      return false;
+    }
  };
 
   /**
