@@ -88,12 +88,14 @@
   this.health = health;
   this.mana = mana;
   this.isAlive = true;
-
-
  }
 
- Spellcaster.prototype.inflictDamage = function() {
-
+ Spellcaster.prototype.inflictDamage = function(damage) {
+  this.health -= damage;
+  if ( this.health <= 0 ) {
+    this.isAlive = false;
+    this.health = 0;
+  }
  };
 
   /**
